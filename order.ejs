@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin:40px;
+        }
+
+        .order{
+            border:1px solid #ccc;
+            padding:20px;
+            margin-bottom:25px;
+        }
+
+        ul{
+            list-style:none;
+            padding:0;
+        }
+
+        li{
+            padding:8px 0;
+            border-bottom:1px solid #eee;
+        }
+
+        h1,h2{
+            margin-bottom:15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Your Orders</h1>
+
+    <% if(orders.length > 0){ %>
+
+        <% orders.forEach(order => { %>
+
+            <div class="order">
+
+                <h2>Order ID : <%= order._id %></h2>
+
+                <ul>
+
+                    <% order.items.forEach(item => { %>
+
+                        <li>
+
+                            <strong><%= item.title %></strong>
+
+                            <br>
+
+                            Price : ₹ <%= item.price %>
+
+                            <br>
+
+                            Quantity : <%= item.quantity %>
+
+                        </li>
+
+                    <% }) %>
+
+                </ul>
+
+            </div>
+
+        <% }) %>
+
+    <% } else { %>
+
+        <h2>No Orders Found!</h2>
+
+    <% } %>
+
+</body>
+
+</html>

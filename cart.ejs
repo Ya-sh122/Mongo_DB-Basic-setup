@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title><%= pageTitle %></title>
+
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            margin:40px;
+        }
+
+        ul{
+            list-style:none;
+            padding:0;
+        }
+
+        li{
+            border:1px solid #ccc;
+            padding:15px;
+            margin-bottom:15px;
+        }
+
+        form{
+            display:inline-block;
+            margin-right:10px;
+        }
+
+        button{
+            padding:8px 16px;
+            cursor:pointer;
+        }
+
+        .order-btn{
+            margin-top:20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Your Cart</h1>
+
+    <% if(products.length > 0){ %>
+
+        <ul>
+
+            <% products.forEach(product => { %>
+
+                <li>
+
+                    <h2><%= product.title %></h2>
+
+                    <p>
+                        Price :
+                        ₹ <%= product.price %>
+                    </p>
+
+                    <p>
+                        Quantity :
+                        <%= product.quantity %>
+                    </p>
+
+                    <form action="/cart-delete-item" method="POST">
+
+                        <input
+                            type="hidden"
+                            name="productId"
+                            value="<%= product._id %>">
+
+                        <button type="submit">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </li>
+
+            <% }) %>
+
+        </ul>
+
+        <form
+            action="/create-order"
+            method="POST"
+            class="order-btn">
+
+            <button type="submit">
+                Order Now
+            </button>
+
+        </form>
+
+    <% } else { %>
+
+        <h2>Your Cart is Empty.</h2>
+
+    <% } %>
+
+</body>
+
+</html>
